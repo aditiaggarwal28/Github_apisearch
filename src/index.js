@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, {Component} from 'react';
+import logo from './logo.svg';
+import './App.css';
+import { ApolloClient,InMemoryCache,
+ApolloProvider,
+useQuery,
+gql } from '@apollo/client';
+import { render } from '@testing-library/react';
+import SearchReact from './AllComponents/SearchReact';
+import App from './App.js'
+const client= new ApolloClient({
+  uri:'https://48p1r2roz4.sse.codesandbox.io/',
+  cache:new InMemoryCache()
+})
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+function NewFi() {
+  return (
+    <div>
+      {console.log("HI")}
+      <SearchReact/>
+      <App />
+    </div>
+  );
+}
+render(
+  <ApolloProvider client={client}>
+    <NewFi/>
+  </ApolloProvider>, document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
